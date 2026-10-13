@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "language": "de",
+  "understanding": {
+    "summary": "Der Imkerei Manager verwaltet Ihre Bienenvölker an ihren Standorten, die Arbeiten an den Völkern, die Honigernten und den Verkauf des Honigs an Käufer.",
+    "roles": [
+      "Imker / Imkerin",
+      "Helfer bei Stockarbeiten und Verkauf"
+    ],
+    "main_tasks": [
+      "Bienenvölker und Standorte pflegen",
+      "Stockarbeiten und Durchsichten erfassen",
+      "Honigernten festhalten",
+      "Honigverkäufe erfassen und Zahlungen im Blick behalten"
+    ],
+    "platform_roles": [
+      {
+        "persona": "Imker / Imkerin",
+        "role": "administrator",
+        "apps": [
+          "standorte",
+          "bienenvoelker",
+          "stockarbeiten",
+          "honigernten",
+          "honigverkaeufe"
+        ]
+      },
+      {
+        "persona": "Helfer bei Stockarbeiten und Verkauf",
+        "role": "standard",
+        "apps": [
+          "stockarbeiten",
+          "honigernten",
+          "honigverkaeufe",
+          "standorte",
+          "bienenvoelker"
+        ]
+      }
+    ]
+  },
+  "flows": [
+    {
+      "slug": "stockarbeit-erfassen",
+      "label": {
+        "de": "Stockarbeit erfassen",
+        "en": "Record hive inspection"
+      },
+      "description": "Eine Durchsicht, Behandlung oder Fütterung an einem Bienenvolk erfassen, optional mit Aktualisierung des Volksstatus.",
+      "priority": "must",
+      "writes": [
+        {
+          "entity": "stockarbeiten",
+          "op": "create",
+          "when": "always",
+          "fields": {
+            "volk": "picked",
+            "datum": "derived:now",
+            "art": "user",
+            "volksstaerke": "user",
+            "sanftmut": "user",
+            "brutbild": "user",
+            "weiselrichtig": "user",
+            "varroabefall": "user",
+            "mittel": "user",
+            "menge": "user",
+            "bemerkungen": "user"
+          },
+          "needs": {}
+        }
+      ],
+      "required": [],
+      "brief": "# Flow `stockarbeit-erfassen` — Stockarbeit erfassen\nEine Durchsicht, Behandlung oder Fütterung an einem Bienenvolk erfassen, optional mit Aktualisierung des Volksstatus.\n\n## Your hook — import it, never rebuild what it owns\n`import { useStockarbeitErfassenFlow } from '@/lib/journey/flows/StockarbeitErfassen';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick: volk), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Standort wählen, um die Völker einzugrenzen\n2. Bienenvolk aus den Völkern des Standorts wählen\n3. Art der Arbeit und Beobachtungen (Stärke, Sanftmut, Brutbild, Varroa) eintragen\n4. Optional Mittel und Menge angeben\n5. Speichern\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- creates `stockarbeiten`:\n    - `volk`: from the record the user picks in this flow\n    - `datum`: derived: now() — set it in the plan step, never ask\n    - `art`: the user enters it (bind it through the layer: form.field/…)\n    - `volksstaerke`: the user enters it (bind it through the layer: form.field/…)\n    - `sanftmut`: the user enters it (bind it through the layer: form.field/…)\n    - `brutbild`: the user enters it (bind it through the layer: form.field/…)\n    - `weiselrichtig`: the user enters it (bind it through the layer: form.field/…)\n    - `varroabefall`: the user enters it (bind it through the layer: form.field/…)\n    - `mittel`: the user enters it (bind it through the layer: form.field/…)\n    - `menge`: the user enters it (bind it through the layer: form.field/…)\n    - `bemerkungen`: the user enters it (bind it through the layer: form.field/…)\n\n## Reads\n- `standorte` columns bezeichnung, ort\n- `bienenvoelker` columns volksname, standort, status, volksstaerke\n\n## Success page\n- shows: `stockarbeiten.volk`, `stockarbeiten.datum`\n- next flows to offer: `stockarbeit-erfassen`\n\n## Never write these — another flow or a tool owns them\n- `honigernten.volk` (owner: intent `honigernte-erfassen`)\n- `honigernten.erntedatum` (owner: intent `honigernte-erfassen`)\n- `honigernten.honigsorte` (owner: intent `honigernte-erfassen`)\n- `honigernten.menge_kg` (owner: intent `honigernte-erfassen`)\n- `honigernten.wassergehalt` (owner: intent `honigernte-erfassen`)\n- `honigernten.anzahl_glaeser` (owner: intent `honigernte-erfassen`)\n- `honigernten.charge` (owner: intent `honigernte-erfassen`)\n- `honigernten.bemerkungen` (owner: intent `honigernte-erfassen`)\n- `honigverkaeufe.ernte` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.verkaufsdatum` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.kaeufer_vorname` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.kaeufer_nachname` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.gebindegroesse` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.anzahl` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.preis_gesamt` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.bezahlt` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.bemerkungen` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.menge_kg` (owner: tool `gesamtmenge-berechnen`)\n"
+    },
+    {
+      "slug": "honigernte-erfassen",
+      "label": {
+        "de": "Honigernte erfassen",
+        "en": "Record honey harvest"
+      },
+      "description": "Die Ernte eines Volkes mit Sorte, Menge, Wassergehalt und Gläsern festhalten.",
+      "priority": "must",
+      "writes": [
+        {
+          "entity": "honigernten",
+          "op": "create",
+          "when": "always",
+          "fields": {
+            "volk": "picked",
+            "erntedatum": "derived:today",
+            "honigsorte": "user",
+            "menge_kg": "user",
+            "wassergehalt": "user",
+            "anzahl_glaeser": "user",
+            "charge": "user",
+            "bemerkungen": "user"
+          },
+          "needs": {}
+        }
+      ],
+      "required": [],
+      "brief": "# Flow `honigernte-erfassen` — Honigernte erfassen\nDie Ernte eines Volkes mit Sorte, Menge, Wassergehalt und Gläsern festhalten.\n\n## Your hook — import it, never rebuild what it owns\n`import { useHonigernteErfassenFlow } from '@/lib/journey/flows/HonigernteErfassen';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick: volk), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Aktives Bienenvolk wählen\n2. Honigsorte und Menge in kg eintragen\n3. Wassergehalt, Anzahl Gläser und Charge angeben\n4. Speichern\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- creates `honigernten`:\n    - `volk`: from the record the user picks in this flow\n    - `erntedatum`: derived: today() — set it in the plan step, never ask\n    - `honigsorte`: the user enters it (bind it through the layer: form.field/…)\n    - `menge_kg`: the user enters it (bind it through the layer: form.field/…)\n    - `wassergehalt`: the user enters it (bind it through the layer: form.field/…)\n    - `anzahl_glaeser`: the user enters it (bind it through the layer: form.field/…)\n    - `charge`: the user enters it (bind it through the layer: form.field/…)\n    - `bemerkungen`: the user enters it (bind it through the layer: form.field/…)\n\n## Reads\n- `bienenvoelker` columns volksname, standort, status\n\n## Success page\n- shows: `honigernten.charge`, `honigernten.menge_kg`\n- next flows to offer: `honigverkauf-erfassen`\n\n## Never write these — another flow or a tool owns them\n- `stockarbeiten.volk` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.datum` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.art` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.volksstaerke` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.sanftmut` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.brutbild` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.weiselrichtig` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.varroabefall` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.mittel` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.menge` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.bemerkungen` (owner: intent `stockarbeit-erfassen`)\n- `honigverkaeufe.ernte` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.verkaufsdatum` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.kaeufer_vorname` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.kaeufer_nachname` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.gebindegroesse` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.anzahl` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.preis_gesamt` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.bezahlt` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.bemerkungen` (owner: intent `honigverkauf-erfassen`)\n- `honigverkaeufe.menge_kg` (owner: tool `gesamtmenge-berechnen`)\n"
+    },
+    {
+      "slug": "honigverkauf-erfassen",
+      "label": {
+        "de": "Honigverkauf erfassen",
+        "en": "Record honey sale"
+      },
+      "description": "Einen Verkauf einer Honigernte an einen Käufer mit Gebinde, Anzahl und Preis erfassen.",
+      "priority": "must",
+      "writes": [
+        {
+          "entity": "honigverkaeufe",
+          "op": "create",
+          "when": "always",
+          "fields": {
+            "ernte": "picked",
+            "verkaufsdatum": "derived:today",
+            "kaeufer_vorname": "user",
+            "kaeufer_nachname": "user",
+            "gebindegroesse": "user",
+            "anzahl": "user",
+            "preis_gesamt": "user",
+            "bezahlt": "user",
+            "bemerkungen": "user"
+          },
+          "needs": {}
+        }
+      ],
+      "required": [
+        "honigverkaeufe.anzahl",
+        "honigverkaeufe.gebindegroesse"
+      ],
+      "brief": "# Flow `honigverkauf-erfassen` — Honigverkauf erfassen\nEinen Verkauf einer Honigernte an einen Käufer mit Gebinde, Anzahl und Preis erfassen.\n\n## Your hook — import it, never rebuild what it owns\n`import { useHonigverkaufErfassenFlow } from '@/lib/journey/flows/HonigverkaufErfassen';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick: ernte), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Honigernte wählen\n2. Käufer eintragen\n3. Gebindegröße, Anzahl und Gesamtpreis angeben\n4. Bezahlt-Status setzen\n5. Speichern\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- creates `honigverkaeufe`:\n    - `ernte`: from the record the user picks in this flow\n    - `verkaufsdatum`: derived: today() — set it in the plan step, never ask\n    - `kaeufer_vorname`: the user enters it (bind it through the layer: form.field/…)\n    - `kaeufer_nachname`: the user enters it (bind it through the layer: form.field/…)\n    - `gebindegroesse`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `gesamtmenge-berechnen` → `menge_kg` cannot be built without it\n    - `anzahl`: the user enters it (bind it through the layer: form.field/…) — **REQUIRED in this flow** (mark it required and validate it before the step advances, whatever the app's base view says): tool `gesamtmenge-berechnen` → `menge_kg` cannot be built without it\n    - `preis_gesamt`: the user enters it (bind it through the layer: form.field/…)\n    - `bezahlt`: the user enters it (bind it through the layer: form.field/…)\n    - `bemerkungen`: the user enters it (bind it through the layer: form.field/…)\n\n## Reads\n- `honigernten` columns charge, honigsorte, erntedatum, menge_kg, volk\n\n## Success page\n- shows: `honigverkaeufe.ernte`, `honigverkaeufe.preis_gesamt`\n- next flows to offer: `honigverkauf-erfassen`\n\n## Never write these — another flow or a tool owns them\n- `stockarbeiten.volk` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.datum` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.art` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.volksstaerke` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.sanftmut` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.brutbild` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.weiselrichtig` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.varroabefall` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.mittel` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.menge` (owner: intent `stockarbeit-erfassen`)\n- `stockarbeiten.bemerkungen` (owner: intent `stockarbeit-erfassen`)\n- `honigernten.volk` (owner: intent `honigernte-erfassen`)\n- `honigernten.erntedatum` (owner: intent `honigernte-erfassen`)\n- `honigernten.honigsorte` (owner: intent `honigernte-erfassen`)\n- `honigernten.menge_kg` (owner: intent `honigernte-erfassen`)\n- `honigernten.wassergehalt` (owner: intent `honigernte-erfassen`)\n- `honigernten.anzahl_glaeser` (owner: intent `honigernte-erfassen`)\n- `honigernten.charge` (owner: intent `honigernte-erfassen`)\n- `honigernten.bemerkungen` (owner: intent `honigernte-erfassen`)\n- `honigverkaeufe.menge_kg` (owner: tool `gesamtmenge-berechnen`)\n"
+    }
+  ],
+  "public_pages": [],
+  "tools": [
+    {
+      "id": "gesamtmenge-berechnen",
+      "purpose": "Berechnet bei jedem neuen Honigverkauf die Gesamtmenge in kg aus Gebindegröße und Anzahl. Die Gebindegröße wird im Code geprüft; bei Eimer oder Sonstige bleibt das Feld unverändert."
+    },
+    {
+      "id": "volk-nach-aufloesung-pruefen",
+      "purpose": "Wöchentliche Erinnerung per Mail an die Imkerin mit Völkern, die seit über 30 Tagen keine Stockarbeit hatten. Schreibt keine Datensätze."
+    },
+    {
+      "id": "unbezahlte-verkaeufe-mail",
+      "purpose": "Wöchentliche Sammelmail an die Imkerin über unbezahlte Honigverkäufe, die älter als 14 Tage sind. Schreibt keine Datensätze."
+    }
+  ],
+  "covered_by_platform": [
+    {
+      "wish": "Verwaltung der Imkerei: Völker, Standorte, Stockarbeiten",
+      "feature": "record_form"
+    },
+    {
+      "wish": "Übersicht und Suche über alle Völker und Ernten",
+      "feature": "list_page"
+    },
+    {
+      "wish": "Verkäufe als Tabelle oder Excel auswerten",
+      "feature": "csv_json_export"
+    },
+    {
+      "wish": "Verkäufe pro Honigernte oder Bezahlt-Status zählen",
+      "feature": "distribution_view"
+    }
+  ],
+  "ownership": {
+    "stockarbeiten": {
+      "volk": "intent:stockarbeit-erfassen",
+      "datum": "intent:stockarbeit-erfassen",
+      "art": "intent:stockarbeit-erfassen",
+      "volksstaerke": "intent:stockarbeit-erfassen",
+      "sanftmut": "intent:stockarbeit-erfassen",
+      "brutbild": "intent:stockarbeit-erfassen",
+      "weiselrichtig": "intent:stockarbeit-erfassen",
+      "varroabefall": "intent:stockarbeit-erfassen",
+      "mittel": "intent:stockarbeit-erfassen",
+      "menge": "intent:stockarbeit-erfassen",
+      "bemerkungen": "intent:stockarbeit-erfassen"
+    },
+    "honigernten": {
+      "volk": "intent:honigernte-erfassen",
+      "erntedatum": "intent:honigernte-erfassen",
+      "honigsorte": "intent:honigernte-erfassen",
+      "menge_kg": "intent:honigernte-erfassen",
+      "wassergehalt": "intent:honigernte-erfassen",
+      "anzahl_glaeser": "intent:honigernte-erfassen",
+      "charge": "intent:honigernte-erfassen",
+      "bemerkungen": "intent:honigernte-erfassen"
+    },
+    "honigverkaeufe": {
+      "ernte": "intent:honigverkauf-erfassen",
+      "verkaufsdatum": "intent:honigverkauf-erfassen",
+      "kaeufer_vorname": "intent:honigverkauf-erfassen",
+      "kaeufer_nachname": "intent:honigverkauf-erfassen",
+      "gebindegroesse": "intent:honigverkauf-erfassen",
+      "anzahl": "intent:honigverkauf-erfassen",
+      "preis_gesamt": "intent:honigverkauf-erfassen",
+      "bezahlt": "intent:honigverkauf-erfassen",
+      "bemerkungen": "intent:honigverkauf-erfassen",
+      "menge_kg": "tool:gesamtmenge-berechnen"
+    }
+  },
+  "dashboard": {
+    "focus": [
+      "Aktive Bienenvölker",
+      "Letzte Stockarbeiten",
+      "Honigernte der Saison in kg",
+      "Unbezahlte Honigverkäufe"
+    ],
+    "hints": [
+      "Zeige Völker nach Status und Standort",
+      "Hebe unbezahlte Verkäufe hervor",
+      "Zeige Völker mit hohem Varroabefall oder schwacher Stärke"
+    ],
+    "wishes": []
+  }
+}

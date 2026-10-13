@@ -1,0 +1,51 @@
+{
+  "StandorteDialog.tsx": {
+    "strasse": "z. B. Blütenweg",
+    "hausnummer": "z. B. 12a",
+    "plz": "z. B. 79098",
+    "ort": "z. B. Freiburg",
+    "kontakt_vorname": "z. B. Anna",
+    "kontakt_nachname": "z. B. Müller",
+    "notizen": "Hinweise zum Standort",
+    "bezeichnung": "z. B. Waldrand-Stand"
+  },
+  "BienenvoelkerDialog.tsx": {
+    "volksname": "z. B. Volk 12 oder Maja",
+    "standort": "Welcher Standort?",
+    "rasse": "z. B. Carnica, Buckfast",
+    "beutentyp": "z. B. Zander, Dadant",
+    "einrichtungsdatum": "Wann wurde das Volk eingerichtet?",
+    "koenigin_baujahr": "z. B. 2025",
+    "koenigin_farbe": "Welche Zeichnungsfarbe?",
+    "koenigin_herkunft": "z. B. Züchter Müller",
+    "bemerkungen": "Besonderheiten zum Volk"
+  },
+  "StockarbeitenDialog.tsx": {
+    "volk": "Welches Volk?",
+    "datum": "Wann war die Arbeit?",
+    "varroabefall": "z. B. 5",
+    "mittel": "z. B. Ameisensäure",
+    "menge": "z. B. 2 Liter",
+    "bemerkungen": "Beobachtungen und Notizen"
+  },
+  "HonigerntenDialog.tsx": {
+    "volk": "Welches Volk?",
+    "honigsorte": "z. B. Raps, Linde, Wald",
+    "menge_kg": "z. B. 25",
+    "wassergehalt": "z. B. 17,5",
+    "anzahl_glaeser": "z. B. 50",
+    "charge": "z. B. HO-2026-001",
+    "bemerkungen": "Besonderheiten der Ernte",
+    "erntedatum": "Wann wurde geerntet?"
+  },
+  "HonigverkaeufeDialog.tsx": {
+    "verkaufsdatum": "Wann wurde verkauft?",
+    "ernte": "Welche Honigernte?",
+    "kaeufer_vorname": "z. B. Anna",
+    "kaeufer_nachname": "z. B. Müller",
+    "anzahl": "z. B. 12",
+    "menge_kg": "z. B. 6",
+    "preis_gesamt": "z. B. 54",
+    "bemerkungen": "Notizen zum Verkauf"
+  }
+}

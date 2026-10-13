@@ -1,0 +1,37 @@
+{
+  "pages": {
+    "en": {
+      "Alle Völker sind stark und varroa-arm.": "All colonies are strong and low in varroa.",
+      "Alle {0} aktiven Völker sind fit — zuletzt bearbeitet: {1}.": "All {0} active colonies are healthy — last updated: {1}.",
+      "Als bezahlt markieren": "Mark as paid",
+      "Brauchen Aufmerksamkeit": "Need attention",
+      "Durchsicht": "Inspection",
+      "Durchsicht überfällig": "Inspection overdue",
+      "Ernte (kg)": "Harvest (kg)",
+      "Erstes Volk anlegen": "Add first colony",
+      "Honigernte {0} nach Sorte": "Honey harvest {0} by variety",
+      "Honigsorte": "Honey variety",
+      "Käufer": "Buyer",
+      "Lege dein erstes Bienenvolk an, dann geht es los.": "Create your first bee colony to get started.",
+      "Letzte Stockarbeiten": "Recent hive work",
+      "Noch keine Bienenvölker — richte deinen Bestand ein.": "No bee colonies yet — set up your stock.",
+      "Noch keine Stockarbeiten erfasst.": "No hive work logged yet.",
+      "Ohne Namen": "Unnamed",
+      "Ohne Volk": "No colony",
+      "Stockarbeit erfassen": "Log hive work",
+      "Unbekannt": "Unknown",
+      "Varroa {0} %": "Varroa {0}%",
+      "Varroa {0} % · schwach": "Varroa {0}% · weak",
+      "Volk": "Colony",
+      "Volk schwach": "Colony weak",
+      "Völker mit Handlungsbedarf": "Colonies requiring action",
+      "haben noch nicht bezahlt — {0} offen, ältester Verkauf vom {1}.": "have not paid yet — {0} outstanding, oldest sale from {1}.",
+      "hat noch nicht bezahlt — {0} offen (Verkauf vom {1}).": "has not paid yet — {0} outstanding (sale from {1}).",
+      "{0} aktive Völker warten auf ihre erste Durchsicht.": "{0} active colonies are waiting for their first inspection.",
+      "{0} brauchen einen Blick.": "{0} need attention.",
+      "{0} braucht einen Blick.": "{0} needs attention.",
+      "{0} — als bezahlt markiert": "{0} — marked as paid"
+    }
+  },
+  "v": 1
+}

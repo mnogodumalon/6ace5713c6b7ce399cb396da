@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "Standorte": {
+      "placeholders_set": 8,
+      "defaults_keys": [],
+      "computed_keys": [],
+      "reason": "Standorte sind reine Stammdaten ohne numerische Felder, daher keine Formeln oder Standardwerte."
+    },
+    "Bienenvölker": {
+      "placeholders_set": 9,
+      "defaults_keys": [
+        "status",
+        "einrichtungsdatum",
+        "koenigin_baujahr"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formeln, da es sich um Stammdaten ohne numerische Berechnungskette handelt."
+    },
+    "Stockarbeiten": {
+      "placeholders_set": 6,
+      "defaults_keys": [
+        "datum"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da es kein Datumspaar und keinen Preis oder Mengenbezug gibt; Baujahr der Königin ist keine Rechengröße."
+    },
+    "Honigernten": {
+      "placeholders_set": 8,
+      "defaults_keys": [
+        "erntedatum"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da kein Preis oder Datumspaar vorhanden ist und das einzige numerische Feld der Verknüpfung (Baujahr der Königin) keine sinnvolle Berechnung ergibt."
+    },
+    "Honigverkäufe": {
+      "placeholders_set": 8,
+      "defaults_keys": [
+        "verkaufsdatum",
+        "anzahl"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da der Preis pro Gebinde nicht über die Ernte abrufbar ist und Menge und Preis von der Gebindegröße abhängen (Fallunterscheidung nötig)."
+    }
+  }
+}
