@@ -20,6 +20,7 @@
 import type { ComponentType } from 'react';
 
 // <custom:intent-imports>
+import { IconClipboardCheck, IconBucketDroplet, IconShoppingCart } from '@tabler/icons-react';
 // </custom:intent-imports>
 
 export interface IntentLink {
@@ -42,6 +43,9 @@ export interface IntentLink {
 
 export const INTENTS: IntentLink[] = [
   // <custom:intents>
+  { path: '/intents/stockarbeit-erfassen', label: { de: 'Stockarbeit erfassen', en: 'Log hive work' }, icon: IconClipboardCheck, description: 'Durchsicht, Behandlung oder Fütterung eines Volks in 3 Schritten erfassen' },
+  { path: '/intents/honig-ernten', label: { de: 'Honig ernten', en: 'Harvest honey' }, icon: IconBucketDroplet, description: 'Honigernte eines Volks mit Sorte, Menge und Gläsern erfassen' },
+  { path: '/intents/honig-verkaufen', label: { de: 'Honig verkaufen', en: 'Sell honey' }, icon: IconShoppingCart, description: 'Verkauf aus einer Honigernte erfassen' },
   // </custom:intents>
 ];
 
@@ -52,7 +56,7 @@ export const INTENTS: IntentLink[] = [
  * purpose — a scaffold update resets it to false (self-healing if Phase 2
  * never ran).
  */
-export const INTENTS_PENDING = true;
+export const INTENTS_PENDING = false;
 
 /**
  * When the Phase-1 bundle was deployed (ISO, set by the service together with

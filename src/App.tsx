@@ -18,6 +18,10 @@ const IntentFields = lazy(() => import('@/pages/IntentFields'));
 const IntentsAdmin = lazy(() => import('@/pages/IntentsAdmin'));
 const AppMap = lazy(() => import('@/pages/AppMap'));
 // <custom:imports>
+const IntentStockarbeitErfassenPage = lazy(() => import('@/pages/intents/StockarbeitErfassenPage'));
+import { DashboardSkeleton } from '@/components/DashboardStates';
+const IntentHonigErntenPage = lazy(() => import('@/pages/intents/HonigErntenPage'));
+const IntentHonigVerkaufenPage = lazy(() => import('@/pages/intents/HonigVerkaufenPage'));
 // </custom:imports>
 
 // Lazy: public pages live outside <Layout> and only load on /#/public/:slug —
@@ -95,6 +99,9 @@ export default function App() {
                 <Route path="verwaltung/oeffentliche-seiten" element={<PublicPagesAdmin />} />
                 <Route path="verwaltung/oeffentliche-seiten/:slug/felder" element={<PublicPageFields />} />
                 {/* <custom:routes> */}
+                <Route path="intents/stockarbeit-erfassen" element={<Suspense fallback={<DashboardSkeleton />}><IntentStockarbeitErfassenPage /></Suspense>} />
+                <Route path="intents/honig-ernten" element={<Suspense fallback={<DashboardSkeleton />}><IntentHonigErntenPage /></Suspense>} />
+                <Route path="intents/honig-verkaufen" element={<Suspense fallback={<DashboardSkeleton />}><IntentHonigVerkaufenPage /></Suspense>} />
                 {/* </custom:routes> */}
                 {/* An unknown hash (a bookmark from before a rebuild renamed the
                     flows, a mistyped link) must not be a blank page. */}
