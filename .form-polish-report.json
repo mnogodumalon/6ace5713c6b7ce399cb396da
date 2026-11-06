@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "Standorte": {
+      "placeholders_set": 8,
+      "defaults_keys": [],
+      "computed_keys": [],
+      "reason": "Standorte sind reine Stammdaten ohne Zahlen- oder Datumsfelder, daher keine Formeln und keine Defaults."
+    },
+    "Bienenvölker": {
+      "placeholders_set": 9,
+      "defaults_keys": [
+        "status",
+        "einrichtungsdatum",
+        "koenigin_baujahr"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formeln, da es sich um Stammdaten ohne numerische Berechnungskette oder Datumspaare handelt."
+    },
+    "Stockarbeiten": {
+      "placeholders_set": 6,
+      "defaults_keys": [
+        "datum"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da es kein Datumspaar und keinen Preis oder Mengenbezug gibt; koenigin_baujahr ergibt keine sinnvolle Berechnung."
+    },
+    "Honigernten": {
+      "placeholders_set": 8,
+      "defaults_keys": [
+        "erntedatum"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da die Menge in kg und die Gläserzahl nicht ohne Glasgröße umrechenbar sind und das einzige Lookup-Feld (Baujahr der Königin) keine Rechengröße ist."
+    },
+    "Honigverkäufe": {
+      "placeholders_set": 8,
+      "defaults_keys": [
+        "verkaufsdatum",
+        "anzahl"
+      ],
+      "computed_keys": [],
+      "reason": "Keine Formel, da Gesamtpreis und Menge von Gebindegröße und frei gewähltem Preis abhängen und keine Preisspalte per applookup erreichbar ist."
+    }
+  }
+}

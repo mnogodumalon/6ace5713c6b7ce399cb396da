@@ -1,0 +1,33 @@
+{
+  "pages": {
+    "en": {
+      "Alle Verkäufe sind bezahlt.": "All sales are paid.",
+      "Alle Völker sind versorgt — {0} aktiv.": "All colonies are taken care of — {0} active.",
+      "Alle aktiven Völker sind in den letzten zwei Wochen durchgesehen worden.": "All active colonies have been inspected in the last two weeks.",
+      "Als bezahlt markieren": "Mark as paid",
+      "Als bezahlt markiert": "Marked as paid",
+      "Bezahlt": "Paid",
+      "Durchsicht erfassen": "Log inspection",
+      "Durchsicht fällig": "Inspection due",
+      "Honig {0}": "Honey {0}",
+      "Honigernte nach Sorte": "Honey harvest by variety",
+      "Lege dein erstes Bienenvolk an, dann geht es los.": "Create your first bee colony to get started.",
+      "Menge": "Quantity",
+      "Neues Volk": "New colony",
+      "Noch keine Stockarbeit": "No hive work yet",
+      "Offen zu bezahlen": "Outstanding payments",
+      "Offene Zahlungen": "Outstanding payments",
+      "Sorte": "Variety",
+      "Stockarbeit": "Hive work",
+      "Stockarbeit erfassen": "Log hive work",
+      "Verkauf erfassen": "Log sale",
+      "haben noch nicht bezahlt.": "have not paid yet.",
+      "hat noch nicht bezahlt.": "has not paid yet.",
+      "seit {0} Tagen": "for {0} days",
+      "{0} brauchen eine Durchsicht.": "{0} need an inspection.",
+      "{0} braucht eine Durchsicht.": "{0} needs an inspection.",
+      "{0} verschoben": "{0} moved"
+    }
+  },
+  "v": 1
+}
